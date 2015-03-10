@@ -33,6 +33,6 @@ Test requests:
 Observations
 ============
 
-- SQLAlchemy 0.9.3, 0.9.4 and 0.9.8 (latest as of now) will deadlock hard if the threading library is not patched with
-  `gevent.monkey.patch_thread()`
-- SQLAlchemy 0.9.1 and 0.9.2 work as expected without patching the threading library
+The threading library must be patched when using gevent with SQLAlchemy, since the connection pool uses thread locks.
+Those locks will deadlock (huh) the interpreter udner gevent if not patched with `gevent.monkey.patch_thread()`.
+SQLAlchemy before 0.9.3 didn't have those locks, but it probably would fail strangely when used with normal threads.
