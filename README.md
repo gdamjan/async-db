@@ -14,6 +14,9 @@ If you never had postgres setup:
     sudo -u postgres createuser $USER
     sudo -u postgres createdb -O $USER $USER
 
+For mysql/mariadb just start it with `sudo systemctl start mysqld`, it'll connect using `root` on localhost which should work
+out of the box.
+
 Test
 ====
 
@@ -21,6 +24,8 @@ Run the app:
 
     uwsgi --ini uwsgi.ini --thr # to work with 1000 thread workers
     uwsgi --ini uwsgi.ini --gev # to work with 1000 async gevent cores
+
+Add --env DB=MYSQL to run tests against MySQL/MariaDB (using oursql + greenify).
 
 Test requests:
 
