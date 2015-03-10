@@ -1,3 +1,4 @@
 gevent_psycopg2
 sqlalchemy
-psycopg2
+greenify
+oursql
