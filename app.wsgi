@@ -1,10 +1,9 @@
 import os
 
-if os.environ.get('GEVENT_MONKEYPATH'):
+if os.environ.get('GEVENT'):
     import gevent.monkey
     gevent.monkey.patch_thread()
 
-if os.environ.get('GEVENT'):
     import gevent_psycopg2
     gevent_psycopg2.monkey_patch()
 
