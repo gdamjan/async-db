@@ -29,3 +29,10 @@ Test requests:
     time curl localhost:8080 -i & \
     time curl localhost:8080 -i
 
+
+Observations
+============
+
+- SQLAlchemy 0.9.3, 0.9.4 and 0.9.8 (latest as of now) will deadlock hard if the threading library is not patched with
+  `gevent.monkey.patch_thread()`
+- SQLAlchemy 0.9.1 and 0.9.2 work as expected without patching the threading library
