@@ -15,7 +15,7 @@ if os.environ.get('DB') == 'MYSQL':
     DSN = "mysql+oursql://root@/"
     QUERY = "SELECT sleep(5)"
 else:
-    DSN = "postgresql+psycopg2://localhost/"
+    DSN = "postgresql+psycopg2://postgres@/"
     QUERY = "SELECT pg_sleep(5)"
 
 

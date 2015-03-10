@@ -11,8 +11,6 @@ If you never had postgres setup:
 
     sudo -u postgres initdb --locale en_US.UTF-8 -D /var/lib/postgres/data
     sudo systemctl start postgresql
-    sudo -u postgres createuser $USER
-    sudo -u postgres createdb -O $USER $USER
 
 For mysql/mariadb just start it with `sudo systemctl start mysqld`, it'll connect using `root` on localhost which should work
 out of the box.
