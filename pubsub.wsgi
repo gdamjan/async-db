@@ -18,7 +18,7 @@ import gevent
 engine = create_engine(DSN)
 DBSession = sessionmaker(bind=engine)
 
-def publisher(session):
+def publisher(session, topic='<hardcoded>'):
     for i in itertools.count():
         data = 'message %d' % i
         session.execute('select pg_sleep(5)')
@@ -29,7 +29,7 @@ session = DBSession()
 gevent.spawn(publisher, session)
 
 
-def subscriber(session):
+def subscriber(session, topic='<hardcoded>'):
     sa_conn = session.bind.connect()
     sa_conn.detach()
     pg_conn = sa_conn.connection.connection
@@ -39,7 +39,7 @@ def subscriber(session):
         gevent.socket.wait_read(pg_conn.fileno())
         pg_conn.poll()
         while pg_conn.notifies:
-            notify = pg_conn.notifies.pop()
+            notify = pg_conn.notifies.pop(0)
             yield notify.payload
     sa_conn.execute('UNLISTEN topic')
     sa_conn.close()
